@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"strings"
 
 	"github.com/aoimaru/docf/lib"
 	"github.com/spf13/cobra"
@@ -36,7 +37,11 @@ to quickly create a Cobra application.`,
 		if len(args) == 0 {
 			log.Fatal("specify Dockerfile")
 		}
-		output := lib.GetRun(args[0], opt.esc)
+		file_name := args[0]
+		if strings.HasSuffix(file_name, "Dockerfile") {
+			log.Fatal(nil)
+		}
+		output := lib.GetRun(file_name, opt.esc)
 		// fmt.Println(output)
 		jsonData, err := json.Marshal(output)
 		if err != nil {
