@@ -38,7 +38,7 @@ to quickly create a Cobra application.`,
 			log.Fatal("specify Dockerfile")
 		}
 		file_name := args[0]
-		if strings.HasSuffix(file_name, "Dockerfile") {
+		if !strings.HasSuffix(file_name, "Dockerfile") {
 			log.Fatal(nil)
 		}
 		output := lib.GetRun(file_name, opt.esc)
