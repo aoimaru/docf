@@ -3,6 +3,7 @@ package lib
 import (
 	"log"
 	"os"
+	"path/filepath"
 	"strings"
 
 	"github.com/moby/buildkit/frontend/dockerfile/parser"
@@ -50,4 +51,22 @@ func GetRun(file_path string, flag bool) OutPut {
 		}
 	}
 	return output
+}
+
+func ListFiles(root string) ([]string, error) {
+	var fps []string
+	err := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if err != nil {
+			return err
+		}
+		// ディレクトリは除く
+		if !info.IsDir() {
+			fps = append(fps, path)
+		}
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return fps, nil
 }
