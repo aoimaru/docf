@@ -1,6 +1,7 @@
 package lib
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -23,14 +24,23 @@ type OutPut struct {
 
 func GetRun(file_path string, flag bool) OutPut {
 	fp, err := os.Open(file_path)
+	var output OutPut
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal(err, "0")
+		return output
 	}
 	res, err := parser.Parse(fp)
 	if err != nil {
-		log.Fatal(err)
+		contents := make([]string, 0)
+		contents = append(contents, "None")
+		res := Result{contents}
+		var output2 OutPut
+		output2.Results = append(output.Results, res)
+		fmt.Println("ここ: ", output2)
+		// log.Fatal(err, " 1111")
+
+		return output2
 	}
-	var output OutPut
 	for _, child := range res.AST.Children {
 		if child.Value == "RUN" {
 			originals := strings.Split(child.Original, " ")

@@ -57,6 +57,7 @@ to quickly create a Cobra application.`,
 				if strings.HasSuffix(fp, "Dockerfile") {
 					fmt.Println(fp, opt.esc)
 					output := lib.GetRun(fp, opt.esc)
+
 					fmt.Println(output)
 					fmt.Println(fp)
 					dirname, basename := filepath.Split(fp)
@@ -77,8 +78,12 @@ to quickly create a Cobra application.`,
 				if strings.HasSuffix(fp, "Dockerfile") {
 					fmt.Println(fp, opt.esc)
 					output := lib.GetRun(fp, opt.esc)
-					fmt.Println(reflect.TypeOf(output))
-					outputs = append(outputs, output)
+					if err != nil {
+						log.Fatal(err)
+					} else {
+						fmt.Println(reflect.TypeOf(output))
+						outputs = append(outputs, output)
+					}
 				}
 			}
 			results := OutPuts{outputs}

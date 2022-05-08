@@ -42,6 +42,7 @@ to quickly create a Cobra application.`,
 			log.Fatal(nil)
 		}
 		output := lib.GetRun(file_name, opt.esc)
+
 		// fmt.Println(output)
 		jsonData, err := json.Marshal(output)
 		if err != nil {
