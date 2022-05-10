@@ -10,7 +10,7 @@ import (
 	"github.com/moby/buildkit/frontend/dockerfile/parser"
 )
 
-func Replace(contents string) {
+func Replace(contents []string) {
 
 }
 
